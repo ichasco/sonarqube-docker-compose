@@ -19,11 +19,11 @@ services:
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_bundled-plugins:/opt/sonarqube/lib/bundled-plugins
     labels:
-    - "traefik.docker.network=traefik"
-    - "traefik.backend=gitlab"
-    - "traefik.sonar.frontend.rule=Host:${EXTERNAL_URL}"
-    - "traefik.sonar.port=9000"
-    - "docker.group=gitlab"
+      - "traefik.docker.network=traefik"
+      - "traefik.backend=sonarqube"
+      - "traefik.sonar.frontend.rule=Host:${EXTERNAL_URL}"
+      - "traefik.sonar.port=9000"
+      - "docker.group=sonarqube"
 
   db:
     image: postgres
@@ -34,6 +34,9 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - postgresql:/var/lib/postgresql/data:Z
+    labels:
+      - "traefik.enable=false"
+      - "docker.group=sonarqube"
 
 networks:
   net:
