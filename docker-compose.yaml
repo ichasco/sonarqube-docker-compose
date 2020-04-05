@@ -27,6 +27,8 @@ services:
 
   db:
     image: postgres
+    container_name: sonarqube-db
+    restart: always
     networks:
       - net
     environment:
