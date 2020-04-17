@@ -19,7 +19,7 @@ services:
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_common:/opt/sonarqube/lib/common
     labels:
-      - "traefik.docker.network=traefik"
+      - "traefik.enable=true"
       - "traefik.backend=sonarqube"
       - "traefik.sonar.frontend.rule=Host:${EXTERNAL_URL}"
       - "traefik.sonar.port=9000"
@@ -37,7 +37,6 @@ services:
     volumes:
       - postgresql:/var/lib/postgresql/data:Z
     labels:
-      - "traefik.enable=false"
       - "docker.group=sonarqube"
 
 networks:
