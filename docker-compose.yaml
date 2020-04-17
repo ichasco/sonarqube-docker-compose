@@ -11,20 +11,15 @@ services:
       - SONARQUBE_JDBC_PASSWORD=${POSTGRES_PASSWORD}
       - TZ=${TZ}
     networks:
-      - traefik
       - net
+    ports:
+      - "9000:9000"
     volumes:
       - sonarqube_conf:/opt/sonarqube/conf
       - sonarqube_data:/opt/sonarqube/data
       - sonarqube_extensions:/opt/sonarqube/extensions
       - sonarqube_common:/opt/sonarqube/lib/common
-    labels:
-      - "traefik.enable=true"
-      - "traefik.backend=sonarqube"
-      - "traefik.sonar.frontend.rule=Host:${EXTERNAL_URL}"
-      - "traefik.sonar.port=9000"
-      - "docker.group=sonarqube"
-
+    
   db:
     image: postgres
     container_name: sonarqube-db
@@ -36,14 +31,9 @@ services:
       - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
     volumes:
       - postgresql:/var/lib/postgresql/data:Z
-    labels:
-      - "docker.group=sonarqube"
 
 networks:
   net:
-  traefik:
-    external:
-      name: traefik
 
 volumes:
   sonarqube_conf:
