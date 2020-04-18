@@ -5,20 +5,25 @@ Setup
 ------
 Create `.env` file and add values
 
-`cp .env.sample .env`
+```
+cp .env.sample .env
+```
 
 Start container
 
-`docker-compose up`
+```
+docker-compose up
+```
 
 Add branch plugin
 -------------------
 
-`wget https://github.com/mc1arke/sonarqube-community-branch-plugin/files/4396080/sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip`
-
-`docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/extensions/plugins/`
-`docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/lib/common/`
-`docker restart sonarqube`
+```
+wget https://github.com/mc1arke/sonarqube-community-branch-plugin/files/4396080/sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip
+docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/extensions/plugins/
+docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/lib/common/
+docker restart sonarqube
+```
 
 
 Add to Gitlab CI
