@@ -5,21 +5,27 @@ Setup
 ------
 Create `.env` file and add values
 
-`cp .env.sample .env`
+
+```
+cp .env.sample .env
+```
 
 Start container
 
-`docker-compose up`
+```
+docker-compose up
+```
 
 Add branch plugin
 -------------------
 
-`wget https://github.com/mc1arke/sonarqube-community-branch-plugin/files/4396080/sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip`
 
-`docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/extensions/plugins/`
-`docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/lib/common/`
-`docker restart sonarqube`
-
+```
+wget https://github.com/mc1arke/sonarqube-community-branch-plugin/files/4396080/sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip
+docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/extensions/plugins/
+docker cp sonarqube-community-branch-plugin-1.4.0-SNAPSHOT.jar.zip sonarqube:/opt/sonarqube/lib/common/
+docker restart sonarqube
+```
 
 Add to Gitlab CI
 -------------------
@@ -45,10 +51,11 @@ code_quality:
       -Dsonar.branch.name=${CI_COMMIT_REF_NAME}
       -Dsonar.projectVersion=${CI_COMMIT_TAG}
       -Dsonar.sourceEncoding=UTF-8
-      -Dsonar.sources=
-      -Dsonar.links.ci=${CI_PROJECT_URL}
-      -Dsonar.links.homepage=${CI_PROJECT_URL}/pipelines
+      -Dsonar.sources=./
+      -Dsonar.links.ci=${CI_PROJECT_URL}/pipelines
+      -Dsonar.links.homepage=${CI_PROJECT_URL}
   only:
     - merge_requests
     - master
 ```
+
